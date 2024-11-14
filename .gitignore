@@ -11,7 +11,7 @@ Thumbs.db
 # File Specific
 #--------------------------
 
-wp-content/github/workflows
+wp-content/github/workflows/*
 
 
 
