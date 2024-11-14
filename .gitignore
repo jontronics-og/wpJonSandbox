@@ -6,6 +6,15 @@
 *.swp
 Thumbs.db
 
+
+#---------------------------
+# File Specific
+#--------------------------
+
+wp-content/github/workflows
+
+
+
 #---------------------------
 # WordPress themes
 #---------------------------
