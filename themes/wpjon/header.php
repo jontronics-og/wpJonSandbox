@@ -13,17 +13,20 @@
         
         <header>
             <section class="top-bar">
-                <div class="logo">
-                    Logo goes here
-                </div>
-                <div class="searchbox">
-                    Search box goes here
-                </div>
+                <div class="container">
+                        <div class="logo">
+                            Logo goes here
+                        </div>
+                        <div class="searchbox">
+                            Search box goes here
+                        </div>
+                </div>        
             </section>
-
             <section class="menu-area">
-                <nav class="main-menu">
-                    Navigation menu goes here
-                </nav>
+                <div class="container">
+                    <nav class="main-menu">
+                       <?php wp_nav_menu( array( 'theme_location' => 'wp_jon_main_menu', 'depth' => 2)); ?>
+                    </nav>
+                </div>
             </section>
         </header>

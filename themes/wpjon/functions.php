@@ -7,3 +7,13 @@ function wpjon_load_scripts(){
 }
 
 add_action( 'wp_enqueue_scripts', 'wpjon_load_scripts' );
+
+
+register_nav_menus(
+
+array(
+    'wp_jon_main_menu' => 'Main Menu',
+    'wp_jon_footer_menu' => 'Footer Menu'
+    )
+
+);
