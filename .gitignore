@@ -21,7 +21,8 @@ Thumbs.db
 /themes/*
 
 # DO NOT ignore these themes...
-!/themes/frost
+# !/themes/frost
+!/themes/wpjon
 
 #---------------------------
 # WordPress plugins
