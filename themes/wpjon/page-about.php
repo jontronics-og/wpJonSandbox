@@ -1,8 +1,9 @@
-<?php get_header(); ?>
+
+<?php get_header()?>
         <div id="content" class="site-content">
-            <div id="primary" class="content-area">
-                <main id="main" class="site-main">
-                    <h1>Blog</h1>
+            <div id="primary" class="site-area">
+                <main id="main" class="site-main">            
+                    <section class="home-blog">
                         <div class="container">
                             <div class="blog-items">
                                 <?php 
@@ -25,8 +26,15 @@
                                 <?php endif; ?>                                
                             </div>
                         </div>
-       
+                    </section>
+                    
                 </main>
             </div>
         </div>
-<?php get_footer(); ?>
+    </div>
+
+    <main>
+        <?php echo "Hello World"; ?>  
+    </main>
+    <?php get_footer()?>
+   
