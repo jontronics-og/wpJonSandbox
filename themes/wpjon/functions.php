@@ -8,12 +8,25 @@ function wpjon_load_scripts(){
 
 add_action( 'wp_enqueue_scripts', 'wpjon_load_scripts' );
 
+function wpjon_config() {
+    register_nav_menus(
+        array(
+            'wp_jon_main_menu' => 'Main Menu',
+            'wp_jon_footer_menu' => 'Footer Menu'
+            )
+    );
 
-register_nav_menus(
-
-array(
-    'wp_jon_main_menu' => 'Main Menu',
-    'wp_jon_footer_menu' => 'Footer Menu'
-    )
-
-);
+    $args = array(
+        'height' => 225,
+        'width' => 1920
+    );
+    add_theme_support('custom-header', $args);
+    add_theme_support('post-thumbnails');
+    add_theme_support('custom-logo', array (
+        'width' => 200,
+        'height' => 110,
+        'flex-height' => true,
+        'flex-width' => true
+    ));
+}
+add_action('after_setup_theme', 'wpjon_config', 0);
