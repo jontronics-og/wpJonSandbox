@@ -24,6 +24,7 @@
                                         <p>Nothing yet to be displayed!</p>
                                 <?php endif; ?>                                
                             </div>
+                            <?php get_sidebar('page'); ?>
                         </div>
        
                 </main>

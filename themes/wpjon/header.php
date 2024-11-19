@@ -24,7 +24,7 @@
                             ?>
                     </div>
                         <div class="searchbox">
-                            Search box goes here
+                         
                         </div>
                 </div>        
             </section>
