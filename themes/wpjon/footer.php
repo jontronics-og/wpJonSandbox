@@ -2,7 +2,7 @@
 
         <div class="container">
             <div class="copyright">
-                Copyright x - Al rights reserved
+                <p> <?php echo get_theme_mod('set_copyright', 'Copyright x - All Rights Reserved'); ?></p>
             </div>
                 <div class="footer-menu">
                     <?php wp_nav_menu( array( 
