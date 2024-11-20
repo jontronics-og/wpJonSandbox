@@ -153,5 +153,7 @@ function wpjon_customizer( $wp_customize ){
             'mime_type' => 'image'
         )));
 
+        
+
 }
 add_action( 'customize_register', 'wpjon_customizer' );

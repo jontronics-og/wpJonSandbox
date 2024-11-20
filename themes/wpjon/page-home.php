@@ -51,7 +51,7 @@
                     </section>
                     
                     <section class="home-blog">
-                        <h2>Latest News</h2>
+                        <h2>Featured Posts</h2>
                         <div class="container">
                             <?php 
 

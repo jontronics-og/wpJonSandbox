@@ -11,12 +11,20 @@ function wpjon_load_scripts(){
 add_action( 'wp_enqueue_scripts', 'wpjon_load_scripts' );
 
 function wpjon_config() {
+
+    $textdomain = 'wpjon';
+    load_theme_textdomain( $textdomain, get_template_directory() . '/languages/' );
+
+
+
+
     register_nav_menus(
         array(
-            'wp_jon_main_menu' => 'Main Menu',
-            'wp_jon_footer_menu' => 'Footer Menu'
-            )
+            'wp_devs_main_menu' => __( 'Main Menu', 'wpjon' ),
+            'wp_devs_footer_menu' => __( 'Footer Menu', 'wpjon' )
+        )
     );
+
 
     $args = array(
         'height' => 225,
