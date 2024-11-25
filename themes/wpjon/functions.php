@@ -94,3 +94,51 @@ function wpjon_sidebars(){
 
 add_action( 'widgets_init', 'wpjon_sidebars' );
 
+
+
+
+
+
+function wpjon_enqueue_scripts() {
+    // Only load these scripts on the home page
+    if (is_front_page() || is_page_template('page-home.php')) {
+        wp_enqueue_script(
+            'gsap', 
+            'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', 
+            array(), 
+            '3.12.2', 
+            true
+        );
+        
+        wp_enqueue_script(
+            'gsap-motionpath', 
+            'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js', 
+            array('gsap'), 
+            '3.12.2', 
+            true
+        );
+        
+        wp_enqueue_script(
+            'hero-animations', 
+            get_template_directory_uri() . '/js/heroAnimations.js', 
+            array('gsap', 'gsap-motionpath'), 
+            '1.0.0', 
+            true
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'wpjon_enqueue_scripts');
+
+function wpjon_enqueue_styles() {
+    // Enqueue main stylesheet
+    wp_enqueue_style('wpjon-style', get_stylesheet_uri());
+    
+    // Enqueue hero styles
+    wp_enqueue_style(
+        'wpjon-hero', 
+        get_template_directory_uri() . '/css/hero.css',
+        array('wpjon-style'), // Make it dependent on main stylesheet
+        '1.0.0'
+    );
+}
+add_action('wp_enqueue_scripts', 'wpjon_enqueue_styles');
