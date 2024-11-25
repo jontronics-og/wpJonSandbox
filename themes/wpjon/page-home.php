@@ -18,7 +18,25 @@ get_header(); ?>
         <div class="hero-left">
             <div class="content-box">
                 <div class="hero-container">
-                    <h1 class="hero-title">Crafting Exceptional WordPress Experiences</h1>
+                
+                <h1 class="hero-title">Crafting 
+                    <span class="wave-text">
+                        <span class="wave-letter">E</span>
+                        <span class="wave-letter">x</span>
+                        <span class="wave-letter">c</span>
+                        <span class="wave-letter">e</span>
+                        <span class="wave-letter">p</span>
+                        <span class="wave-letter">t</span>
+                        <span class="wave-letter">i</span>
+                        <span class="wave-letter">o</span>
+                        <span class="wave-letter">n</span>
+                        <span class="wave-letter">a</span>
+                        <span class="wave-letter">l</span>
+                    </span> 
+                    WordPress Experiences</h1>
+
+
+
                     <h2 class="hero-subtitle">Enhancing Your Digital Presence with Custom WordPress Solutions</h2>
                     <button class="cta-button">Let's Talk</button>
                 </div>
