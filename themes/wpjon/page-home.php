@@ -103,6 +103,21 @@ get_header(); ?>
     </div>
 </section>
 
+<div class="container">
+   <div class="header">
+   <h2>Latest Insights & Projects</h2>
+   <p>Dive into my journey as a WordPress developer through technical deep-dives, project case studies, and development best practices. Here I share my hands-on experience building scalable WordPress solutions and tackling real-world development challenges.</p>
+       <div class="tag active" data-category-id="10">All</div>
+       <div class="tag" data-category-id="7">Wordpress Development</div>
+       <div class="tag" data-category-id="9">UX/UI</div>
+       <div class="tag" data-category-id="8">Technical SEO</div>
+   </div>
+   <div id="card-grid" class="grid">
+   </div>
+</div>
+
+
+
 <!-- Services Section -->
 <section class="services">
     <div class="container">
