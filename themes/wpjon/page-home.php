@@ -116,6 +116,30 @@ get_header(); ?>
    </div>
 </div>
 
+<section class="testimonials-section">
+    <div class="dot-background"></div>
+    <div class="testimonials-content">
+        <h2>Trusted by Leaders</h2>
+        <p>See what co-workers, managers, executives and clients have to say about my expertise and collaborative approach.</p>
+        
+        <div class="testimonial-card">
+            <div class="testimonial-text">
+                <blockquote>"Antimetal optimizes our cloud spend without compromising on security. Their expertise in striking the perfect balance between cost optimization and robust security measures makes them an invaluable asset."</blockquote>
+            </div>
+            <div class="testimonial-author">
+                <div class="author-info">
+                    <img src="path-to-avatar.jpg" alt="Nicolas Chaillan" class="author-avatar">
+                    <div class="author-details">
+                        <h3>Nicolas Chaillan</h3>
+                        <p>Former U.S. Air Force and Space Force<br>Chief Software Officer (CSO)</p>
+                    </div>
+                </div>
+                <img src="path-to-aircraft.png" alt="Military Aircraft" class="testimonial-image">
+            </div>
+        </div>
+    </div>
+</section>
+
 
 
 <!-- Services Section -->

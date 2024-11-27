@@ -146,5 +146,7 @@ add_action('wp_enqueue_scripts', 'wpjon_enqueue_styles');
 function enqueue_homepage_content() {
     wp_enqueue_style('homepage-content', get_template_directory_uri() . '/css/homepageContent.css');
     wp_enqueue_script('homepage-content', get_template_directory_uri() . '/js/homepageContent.js', array(), '1.0', true);
+    wp_enqueue_style('homepage-testimonials', get_template_directory_uri() . '/css/homepageTestimonials.css');
+    wp_enqueue_script('testimonials-background', get_template_directory_uri() . '/js/testimonialsBackground.js', array(), '1.0', true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_homepage_content');

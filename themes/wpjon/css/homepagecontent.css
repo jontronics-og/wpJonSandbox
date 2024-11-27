@@ -32,6 +32,10 @@
     background: #111827;
     color: white;
  }
+
+ .tag:not(:first-child) {
+    border: 1px solid #E5E7EB;
+ }
  
  .tag:first-child:hover {
     background: #111827;
