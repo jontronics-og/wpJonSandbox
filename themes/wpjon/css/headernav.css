@@ -1,0 +1,119 @@
+/* Reset styles */
+.wpj-header * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header container */
+.wpj-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(248, 250, 252, 0.8);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.wpj-header-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo styles */
+.wpj-logo {
+    color: #000000;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.wpj-logo:hover {
+    color: #000000;
+}
+
+/* Navigation styles */
+.wpj-main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.wpj-main-nav ul.wpj-nav-links,
+.wpj-main-nav .menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.wpj-main-nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+.wpj-nav-links a,
+.wpj-main-nav .menu a {
+    color: #475569;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    padding: 0.5rem 0;
+}
+
+.wpj-nav-links a:hover,
+.wpj-main-nav .menu a:hover {
+    color: #0f172a;
+}
+
+/* Action button styles */
+.wpj-header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.wpj-action-btn {
+    background: #18181b;
+    color: #fff !important;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.wpj-action-btn:hover {
+    background: #2d2d30;
+}
+
+/* Scrolled state */
+.wpj-header.scrolled {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Add space below header */
+.site {
+    padding-top: 40px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .wpj-nav-links {
+        display: none;
+    }
+    
+    .wpj-header-actions {
+        margin-left: auto;
+    }
+}

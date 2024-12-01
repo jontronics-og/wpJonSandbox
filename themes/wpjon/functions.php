@@ -7,16 +7,11 @@ function wpjon_load_scripts(){
     wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap', array(), null );
     wp_enqueue_script( 'dropdown', get_template_directory_uri() . '/js/dropdown.js', array(), '1.0', true);
 }
-
 add_action( 'wp_enqueue_scripts', 'wpjon_load_scripts' );
 
 function wpjon_config() {
-
     $textdomain = 'wpjon';
     load_theme_textdomain( $textdomain, get_template_directory() . '/languages/' );
-
-
-
 
     register_nav_menus(
         array(
@@ -24,7 +19,6 @@ function wpjon_config() {
             'wp_devs_footer_menu' => __( 'Footer Menu', 'wpjon' )
         )
     );
-
 
     $args = array(
         'height' => 225,
@@ -40,8 +34,6 @@ function wpjon_config() {
     ));
 }
 add_action('after_setup_theme', 'wpjon_config', 0);
-
-
 
 function wpjon_sidebars(){
     register_sidebar(
@@ -89,15 +81,7 @@ function wpjon_sidebars(){
         )
     );
 }
-
-
-
 add_action( 'widgets_init', 'wpjon_sidebars' );
-
-
-
-
-
 
 function wpjon_enqueue_scripts() {
     // Only load these scripts on the home page
@@ -130,14 +114,11 @@ function wpjon_enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'wpjon_enqueue_scripts');
 
 function wpjon_enqueue_styles() {
-    // Enqueue main stylesheet
-    wp_enqueue_style('wpjon-style', get_stylesheet_uri());
-    
     // Enqueue hero styles
     wp_enqueue_style(
         'wpjon-hero', 
         get_template_directory_uri() . '/css/hero.css',
-        array('wpjon-style'), // Make it dependent on main stylesheet
+        array('wpjon-style'), 
         '1.0.0'
     );
 }
@@ -150,3 +131,26 @@ function enqueue_homepage_content() {
     wp_enqueue_script('testimonials-background', get_template_directory_uri() . '/js/testimonialsBackground.js', array(), '1.0', true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_homepage_content');
+
+function wpjon_enqueue_header_nav() {
+    // Only enqueue GSAP if it's not already enqueued
+    if (!wp_script_is('gsap', 'enqueued')) {
+        wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', array(), '3.12.2', true);
+    }
+    
+    wp_enqueue_script(
+        'wpjon-header-nav', 
+        get_template_directory_uri() . '/js/headernav.js', 
+        array('gsap'), 
+        '1.0.0', 
+        true
+    );
+    
+    wp_enqueue_style(
+        'wpjon-header-nav', 
+        get_template_directory_uri() . '/css/headernav.css', 
+        array(), 
+        '1.0.0'
+    );
+}
+add_action('wp_enqueue_scripts', 'wpjon_enqueue_header_nav');
