@@ -1,5 +1,10 @@
 <?php 
 
+
+
+
+
+
 require get_template_directory() . '/inc/customizer.php';
 
 function wpjon_load_scripts(){
@@ -154,3 +159,88 @@ function wpjon_enqueue_header_nav() {
     );
 }
 add_action('wp_enqueue_scripts', 'wpjon_enqueue_header_nav');
+
+
+// Generate table of contents from h2 headings
+function generate_table_of_contents() {
+    global $post;
+    $content = $post->post_content;
+    $matches = array();
+    
+    // This pattern will match both plain h2 tags and h2 tags with classes
+    preg_match_all('/<h2[^>]*>(.*?)<\/h2>/', $content, $matches);
+
+    if (!empty($matches[1])) {
+        echo '<ul>';
+        foreach ($matches[1] as $heading) {
+            // Clean the heading text by removing any HTML tags
+            $clean_heading = strip_tags($heading);
+            // Create an anchor ID from the cleaned heading
+            $anchor = sanitize_title($clean_heading);
+            echo '<li><a href="#' . esc_attr($anchor) . '">' . esc_html($clean_heading) . '</a></li>';
+        }
+        echo '</ul>';
+    }
+}
+
+// Add IDs to h2 tags in content
+function add_ids_to_headings($content) {
+    // This will handle both plain h2 tags and h2 tags with existing attributes
+    $pattern = '/<h2([^>]*)>(.*?)<\/h2>/i';
+    
+    $content = preg_replace_callback($pattern, function($matches) {
+        $attributes = $matches[1];
+        $heading_text = $matches[2];
+        
+        // Clean the heading text and create the ID
+        $clean_heading = strip_tags($heading_text);
+        $anchor = sanitize_title($clean_heading);
+        
+        // If there are existing attributes, we'll append the id
+        if (!empty($attributes)) {
+            // Check if there's already an ID
+            if (strpos($attributes, 'id=') === false) {
+                $attributes .= ' id="' . esc_attr($anchor) . '"';
+            }
+        } else {
+            $attributes = ' id="' . esc_attr($anchor) . '"';
+        }
+        
+        return "<h2{$attributes}>{$heading_text}</h2>";
+    }, $content);
+    
+    return $content;
+}
+add_filter('the_content', 'add_ids_to_headings', 99); // Higher priority to run after other content filters
+
+// Enqueue the single blog styles
+function enqueue_single_blog_styles() {
+    if (is_single()) {
+        wp_enqueue_style('single-blog-styles', get_template_directory_uri() . '/css/single-blog.css');
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_single_blog_styles');
+
+
+function get_reading_time() {
+    $content = get_post_field('post_content', get_the_ID());
+    $word_count = str_word_count(strip_tags($content));
+    $reading_time = ceil($word_count / 200); // Assuming 200 words per minute reading speed
+
+    return $reading_time . ' min read';
+}
+
+
+// Enqueue smooth scroll script
+function enqueue_smooth_scroll() {
+    if (is_single()) {
+        wp_enqueue_script(
+            'smooth-scroll',
+            get_template_directory_uri() . '/js/singleBlog.js',
+            array(),
+            '1.0',
+            true
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_smooth_scroll');
