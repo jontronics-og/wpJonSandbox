@@ -35,7 +35,25 @@ Tags: one-column, custom-colors, custom-menu, custom-logo, editor-style, feature
 
 
 
+ .admin-bar header {
+    margin-top: 32px; /* Adds space for admin bar */
+}
 
+/* For mobile screens */
+@media screen and (max-width: 782px) {
+    .admin-bar header {
+        margin-top: 46px; /* Admin bar is taller on mobile */
+    }
+}
+.admin-bar .your-header-class {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    .admin-bar .your-header-class {
+        top: 46px;
+    }
+}
  
 
  html {
