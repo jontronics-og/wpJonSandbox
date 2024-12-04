@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         posts.forEach((post, index) => {
             if (!post._embedded?.['wp:term']) return;
- 
+    
             const card = document.createElement('div');
             card.className = 'content-card opacity-0 translate-y-8';
             const categories = post._embedded['wp:term'][0];
@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.innerHTML = `
                     <div class="icon ${getCategoryColor(categoryId)}">${categoryName}</div>
                     <p class="card-text">${post.title.rendered}</p>
+                    <a href="${post.link}" class="read-more">Read More →</a>
                 `;
                 
                 card.dataset.categoryId = categoryId;
