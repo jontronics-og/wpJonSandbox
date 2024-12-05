@@ -97,6 +97,114 @@
     background: #2d2d30;
 }
 
+/* Mobile menu button */
+.wpj-mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.hamburger-lines {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #18181b;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hamburger-lines::before,
+.hamburger-lines::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background: #18181b;
+    transition: all 0.3s ease;
+}
+
+.hamburger-lines::before {
+    transform: translateY(-6px);
+}
+
+.hamburger-lines::after {
+    transform: translateY(6px);
+}
+
+/* Mobile menu */
+.wpj-mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+}
+
+.close-menu {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #18181b;
+}
+
+.wpj-mobile-menu-content {
+    padding: 80px 32px;
+}
+
+.wpj-mobile-nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.wpj-mobile-nav-links li {
+    margin: 24px 0;
+}
+
+.wpj-mobile-nav-links a {
+    color: #18181b;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.wpj-action-btn.mobile {
+    margin-top: 32px;
+    display: inline-block;
+}
+
+/* Active states */
+.menu-open .wpj-mobile-menu {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.menu-open .hamburger-lines {
+    background: transparent;
+}
+
+.menu-open .hamburger-lines::before {
+    transform: rotate(45deg);
+}
+
+.menu-open .hamburger-lines::after {
+    transform: rotate(-45deg);
+}
+
 /* Scrolled state */
 .wpj-header.scrolled {
     background: rgba(255, 255, 255, 0.9);
@@ -109,11 +217,12 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
-    .wpj-nav-links {
+    .wpj-main-nav,
+    .wpj-header-actions .wpj-action-btn {
         display: none;
     }
-    
-    .wpj-header-actions {
-        margin-left: auto;
+
+    .wpj-mobile-menu-toggle {
+        display: block;
     }
 }

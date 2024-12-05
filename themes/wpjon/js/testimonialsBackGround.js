@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             author: "Nicolas Chaillan",
             role: "Former U.S. Air Force and Space Force<br>Chief Software Officer (CSO)",
             avatar: "path-to-avatar.jpg",
-            image: "path-to-aircraft.png",
+            image: "",
             imageAlt: "Military Aircraft"
         },
         {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             author: "Sarah Chen",
             role: "Chief Technology Officer<br>Fortune 500 Financial Services",
             avatar: "path-to-avatar2.jpg",
-            image: "path-to-finance.png",
+            image: "",
             imageAlt: "Financial District"
         },
         {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             author: "Michael Anderson",
             role: "VP of Engineering<br>Leading SaaS Platform",
             avatar: "path-to-avatar3.jpg",
-            image: "path-to-tech.png",
+            image: "",
             imageAlt: "Tech Office"
         }
     ];

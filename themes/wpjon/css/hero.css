@@ -5,6 +5,7 @@
 .wave-letter {
     display: inline-block;
     transform-origin: 50% 50%;
+    font-size: 48px;
 }
 
 @keyframes wave-rise {
@@ -309,9 +310,31 @@
         padding: 20px 5%;
     }
     .hero-title {
-        font-size: 48px;
+        font-size: 38px;
     }
     .hero-subtitle {
-        font-size: 24px;
+        font-size: 18px;
+    }
+
+    .wave-letter {
+        display: inline-block;
+        transform-origin: 50% 50%;
+        font-size: 28px;
+    }
+
+    .cta-button {
+        position: relative;
+        background-color: #1a1a1a;
+        color: white;
+        padding: 16px 32px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        display: inline-flex
+    ;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 }

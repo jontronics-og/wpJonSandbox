@@ -31,7 +31,7 @@
 }
 
 .testimonial-text blockquote {
-    font-size: 48px;  /* Increased from 32px to 48px */
+    font-size: 28px;  /* Increased from 32px to 48px */
     line-height: 1.2; /* Adjusted line height for better readability */
     margin-bottom: 40px;
     animation: fadeInRight 1s ease forwards;
