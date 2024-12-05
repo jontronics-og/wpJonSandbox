@@ -152,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.pagination')?.remove();
         createPagination();
         observeCards();
+        initWaveLetters();
     }
  
     function createCards(posts) {
@@ -170,10 +171,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const categoryId = categories[0].id.toString();
                 
                 card.innerHTML = `
-                    <div class="icon ${getCategoryColor(categoryId)}">${categoryName}</div>
-                    <p class="card-text">${post.title.rendered}</p>
-                    <a href="${post.link}" class="read-more">Read More →</a>
-                `;
+    <a href="${post.link}" class="card-link">
+        <div class="icon ${getCategoryColor(categoryId)}">${categoryName}</div>
+        <p class="card-text">${post.title.rendered}</p>
+        <div class="read-more">
+            <span class="wave-text">
+                ${Array.from('Read More →').map((char, index) => 
+                    `<span class="wave-letter" style="--i: ${index}">${char === ' ' ? '&nbsp;' : char}</span>`
+                ).join('')}
+            </span>
+        </div>
+    </a>
+`;
                 
                 card.dataset.categoryId = categoryId;
                 cardGrid.appendChild(card);
@@ -230,9 +239,18 @@ document.addEventListener('DOMContentLoaded', () => {
         loadPage(1);
     }
  
+    function initWaveLetters() {
+        document.querySelectorAll('.wave-text').forEach(text => {
+            text.querySelectorAll('.wave-letter').forEach((letter, index) => {
+                letter.style.setProperty('--i', index);
+            });
+        });
+    }
+ 
     fetchPosts().then(posts => {
         createCards(posts);
         createPagination();
         observeCards();
+        initWaveLetters();
     });
  });

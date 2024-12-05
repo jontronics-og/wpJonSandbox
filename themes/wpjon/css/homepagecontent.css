@@ -1,4 +1,3 @@
-/* homepageContent.css */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -18,35 +17,29 @@
     margin-bottom: 20px;
     cursor: pointer;
     margin-right: 10px;
- }
- .tag.active {
+}
+.tag.active {
     background: #111827;
     color: white;
- }
-
- .tag.active:hover {
+}
+.tag.active:hover {
     color: black;
- }
- 
- .tag:first-child {
+}
+.tag:first-child {
     background: #111827;
     color: white;
- }
-
- .tag:not(:first-child) {
+}
+.tag:not(:first-child) {
     border: 1px solid #E5E7EB;
- }
- 
- .tag:first-child:hover {
+}
+.tag:first-child:hover {
     background: #111827;
     color: #000000;
- }
-
+}
 .tag:hover {
    background: #e5e7eb;
    transition: background-color 0.3s;
 }
-
 .title {
     font-size: 48px;
     font-weight: bold;
@@ -65,19 +58,22 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: all 0.5s ease;
     transform: translateY(0);
-
-
     display: flex;
     flex-direction: column;
     position: relative;
-    min-height: 200px; /* Adjust based on your needs */
+    min-height: 200px;
+    cursor: pointer;
 }
-
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 .content-card:hover {
     background-color: #F3F4F6;
 }
-
-
 .content-card.hidden {
     display: none;
 }
@@ -123,21 +119,30 @@
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s;
- }
+}
 .pagination-btn:hover {
     background: #e5e7eb;
 }
-
-
 .read-more {
     margin-top: auto;
     padding-top: 16px;
     color: #111827;
-    text-decoration: none;
     font-size: 14px;
     transition: color 0.3s;
 }
-
-.read-more:hover {
-    color: #4B5563;
+.wave-text {
+    display: inline-block;
+}
+.wave-letter {
+    display: inline-block;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+.content-card:hover .wave-letter {
+    animation: wave 1.5s infinite;
+    animation-delay: calc(0.05s * var(--i));
+}
+@keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
