@@ -69,7 +69,7 @@ serviceOrder.forEach(id => {
 function createWave() {
     const waveTl = gsap.timeline();
     
-    waveTl.to(".wave-letter", {
+    waveTl.to(".wave-letter-hero", {
         y: -15,
         duration: 0.5,
         ease: "power1.inOut",

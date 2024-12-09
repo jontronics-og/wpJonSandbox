@@ -137,6 +137,7 @@
     display: inline-block;
     transform: translateY(0);
     transition: transform 0.3s ease;
+    font-size: 14px;
 }
 .content-card:hover .wave-letter {
     animation: wave 1.5s infinite;

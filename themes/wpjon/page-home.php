@@ -18,27 +18,34 @@ get_header(); ?>
         <div class="hero-left">
             <div class="content-box">
                 <div class="hero-container">
-                
-                <h1 class="hero-title">Crafting 
-                    <span class="wave-text">
-                        <span class="wave-letter">E</span>
-                        <span class="wave-letter">x</span>
-                        <span class="wave-letter">c</span>
-                        <span class="wave-letter">e</span>
-                        <span class="wave-letter">p</span>
-                        <span class="wave-letter">t</span>
-                        <span class="wave-letter">i</span>
-                        <span class="wave-letter">o</span>
-                        <span class="wave-letter">n</span>
-                        <span class="wave-letter">a</span>
-                        <span class="wave-letter">l</span>
-                    </span> 
-                    WordPress Experiences</h1>
-
-
-
+                    <h1 class="hero-title">Crafting 
+                        <span class="wave-text">
+                            <span class="wave-letter-hero">E</span>
+                            <span class="wave-letter-hero">x</span>
+                            <span class="wave-letter-hero">c</span>
+                            <span class="wave-letter-hero">e</span>
+                            <span class="wave-letter-hero">p</span>
+                            <span class="wave-letter-hero">t</span>
+                            <span class="wave-letter-hero">i</span>
+                            <span class="wave-letter-hero">o</span>
+                            <span class="wave-letter-hero">n</span>
+                            <span class="wave-letter-hero">a</span>
+                            <span class="wave-letter-hero">l</span>
+                        </span> 
+                        WordPress Experiences</h1>
                     <h2 class="hero-subtitle">Enhancing Your Digital Presence with Custom WordPress Solutions</h2>
-                    <button class="cta-button">Let's Talk</button>
+                    <div class="button-group">
+                        <a href="tel:+13474320497" class="cta-button">
+                            <i class="fa-solid fa-phone"></i>
+                            Let's Talk
+                        </a>
+                        <a href="<?php echo esc_url(wp_get_upload_dir()['baseurl'] . '/2024/12/Jonathan-Aquarone-Resume.pdf'); ?>" 
+                           class="cta-button cta-button-secondary" 
+                           download>
+                            <i class="fa-solid fa-download"></i>
+                            DL Resume
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -124,28 +131,25 @@ get_header(); ?>
         
         <div class="testimonial-card">
             <div class="testimonial-text">
-                <blockquote>"Antimetal optimizes our cloud spend without compromising on security. Their expertise in striking the perfect balance between cost optimization and robust security measures makes them an invaluable asset."</blockquote>
+                <blockquote></blockquote>
             </div>
             <div class="testimonial-author">
                 <div class="author-info">
-                    <img src="path-to-avatar.jpg" alt="Nicolas Chaillan" class="author-avatar">
                     <div class="author-details">
-                        <h3>Nicolas Chaillan</h3>
-                        <p>Former U.S. Air Force and Space Force<br>Chief Software Officer (CSO)</p>
+                        <h3 class="details"></h3>
+                        <p></p>
                     </div>
                 </div>
-                <img src="path-to-aircraft.png" alt="Military Aircraft" class="testimonial-image">
             </div>
         </div>
     </div>
 </section>
 
-
-
 <!-- Services Section -->
-<section class="services">
+<!-- <section class="services">
     <div class="container">
-        <?php if (is_active_sidebar('services-1')) : ?>
+        
+        <?php /* if (is_active_sidebar('services-1')) : ?>
             <div class="services-item">
                 <?php dynamic_sidebar('services-1'); ?>
             </div>
@@ -161,12 +165,12 @@ get_header(); ?>
             <div class="services-item">
                 <?php dynamic_sidebar('services-3'); ?>
             </div>
-        <?php endif; ?>
+        <?php endif;*/ ?>
     </div>
-</section>
+</section> -->
 
 <!-- Blog Section -->
-<?php
+<?php /*
 $args = array(
     'post_type' => 'post',
     'posts_per_page' => 5,
@@ -210,6 +214,6 @@ if ($recent_posts->have_posts()) : ?>
     </section>
     <?php 
     wp_reset_postdata();
-endif; ?>
+endif; */ ?> 
 
 <?php get_footer(); ?>

@@ -1,8 +1,9 @@
+/* Wave text animation */
 .wave-text {
     display: inline-block;
 }
 
-.wave-letter {
+.wave-letter-hero {
     display: inline-block;
     transform-origin: 50% 50%;
     font-size: 48px;
@@ -29,15 +30,6 @@
 .wave-letter:nth-child(9) { animation-delay: 0.8s; }
 .wave-letter:nth-child(10) { animation-delay: 0.9s; }
 .wave-letter:nth-child(11) { animation-delay: 1.0s; }
-
-
-
-
-
-
-
-
-
 
 /* Hero Section */
 .hero-section {
@@ -125,7 +117,18 @@
     font-weight: 400;
 }
 
-.cta-button {
+/* Button Styles */
+.button-group,
+.wpj-mobile-cta-group {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.cta-button,
+.wpj-mobile-cta-button {
     position: relative;
     background-color: #1a1a1a;
     color: white;
@@ -137,7 +140,38 @@
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    gap: 8px;
+    text-decoration: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex: 1;
+    justify-content: center;
+    min-width: 180px;
+    text-align: center;
+}
+
+.cta-button:hover,
+.wpj-mobile-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    color: white;
+    text-decoration: none;
+}
+
+.cta-button i,
+.wpj-mobile-cta-button i {
+    color: white;
+    font-size: 18px;
+}
+
+.cta-button-secondary,
+.wpj-mobile-cta-secondary {
+    background-color: #4B5563;
+}
+
+.cta-button-secondary:hover,
+.wpj-mobile-cta-secondary:hover {
+    background-color: #374151;
 }
 
 /* Services Container */
@@ -290,7 +324,13 @@
     justify-content: center;
 }
 
-/* Responsive Design */
+/* Mobile Menu Styles */
+.wpj-mobile-cta-group {
+    margin-top: 32px;
+    padding: 0 32px;
+}
+
+/* Responsive styles */
 @media (max-width: 1024px) {
     .hero-wrapper {
         flex-direction: column;
@@ -309,32 +349,94 @@
     .hero-wrapper {
         padding: 20px 5%;
     }
+    
     .hero-title {
-        font-size: 38px;
+        font-size: 40px;
     }
+    
     .hero-subtitle {
         font-size: 18px;
     }
 
-    .wave-letter {
-        display: inline-block;
-        transform-origin: 50% 50%;
+    .button-group,
+    .wpj-mobile-cta-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-button,
+    .wpj-mobile-cta-button {
+        width: 100%;
+        min-width: unset;
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+
+    .cta-button i,
+    .wpj-mobile-cta-button i {
+        font-size: 16px;
+    }
+
+    .wave-letter-hero {
         font-size: 28px;
     }
 
-    .cta-button {
-        position: relative;
-        background-color: #1a1a1a;
-        color: white;
-        padding: 16px 32px;
-        border-radius: 12px;
-        font-size: 14px;
-        font-weight: 500;
-        border: none;
-        cursor: pointer;
-        display: inline-flex
-    ;
-        align-items: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    h2 {
+        font-size: 32px;
     }
+
+    p {
+        font-size: 16px;
+    }
+
+    .wave-letter {
+        font-size: 14px;
+    }
+
+    .card-text {
+        font-size: 18px;
+    }
+}
+
+/* Remove the old mobile action button */
+.wpj-action-btn.mobile {
+    display: none;
+}
+
+/* Close menu animation */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.close-menu {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #18181b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    animation: rotate 2s linear infinite;
+}
+
+.close-menu:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #2d2d30;
+}
+
+.close-menu:focus {
+    outline: 2px solid #18181b;
+    outline-offset: 2px;
 }

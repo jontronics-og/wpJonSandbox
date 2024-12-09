@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Dot background code remains the same
+    // Dot background effect
     const dotBackground = document.createElement('div');
     dotBackground.className = 'dot-background';
     
@@ -38,61 +38,44 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             quote: "Antimetal optimizes our cloud spend without compromising on security. Their expertise in striking the perfect balance between cost optimization and robust security measures makes them an invaluable asset.",
             author: "Nicolas Chaillan",
-            role: "Former U.S. Air Force and Space Force<br>Chief Software Officer (CSO)",
-            avatar: "path-to-avatar.jpg",
-            image: "",
-            imageAlt: "Military Aircraft"
+            role: "Former U.S. Air Force and Space Force<br>Chief Software Officer (CSO)"
         },
         {
             quote: "Their deep understanding of cloud infrastructure and security protocols has transformed how we approach our cloud architecture. The cost savings have been substantial without any compromise on performance.",
             author: "Sarah Chen",
-            role: "Chief Technology Officer<br>Fortune 500 Financial Services",
-            avatar: "path-to-avatar2.jpg",
-            image: "",
-            imageAlt: "Financial District"
+            role: "Chief Technology Officer<br>Fortune 500 Financial Services"
         },
         {
             quote: "We've seen a 40% reduction in cloud costs while enhancing our security posture. Their collaborative approach ensures our team understands and can maintain the optimizations implemented.",
             author: "Michael Anderson",
-            role: "VP of Engineering<br>Leading SaaS Platform",
-            avatar: "path-to-avatar3.jpg",
-            image: "",
-            imageAlt: "Tech Office"
+            role: "VP of Engineering<br>Leading SaaS Platform"
         }
     ];
 
     let currentIndex = 0;
     const quoteElement = document.querySelector('.testimonial-text blockquote');
-    const authorInfo = document.querySelector('.author-info');
-    const testimonialImage = document.querySelector('.testimonial-image');
+    const authorNameElement = document.querySelector('.author-details h3.details');
+    const authorRoleElement = document.querySelector('.author-details p');
     
     function updateTestimonial() {
-        // Start fade out animations
-        quoteElement.style.animation = 'fadeOutLeft 1s ease forwards';
-        authorInfo.style.animation = 'fadeOutLeft 1s ease forwards';
-        testimonialImage.style.animation = 'fadeOutLeft 1s ease forwards';
+        // Start fade out animation
+        quoteElement.style.opacity = '0';
+        authorNameElement.style.opacity = '0';
+        authorRoleElement.style.opacity = '0';
         
         // After fade out, update content and fade in
         setTimeout(() => {
             const testimonial = testimonials[currentIndex];
             
-            // Update quote and author info
-            quoteElement.innerHTML = testimonial.quote;
-            document.querySelector('.author-details h3').textContent = testimonial.author;
-            document.querySelector('.author-details p').innerHTML = testimonial.role;
+            // Update content
+            quoteElement.innerHTML = `"${testimonial.quote}"`;
+            authorNameElement.textContent = testimonial.author;
+            authorRoleElement.innerHTML = testimonial.role;
             
-            // Update images
-            const avatar = document.querySelector('.author-avatar');
-            avatar.src = testimonial.avatar;
-            avatar.alt = testimonial.author;
-            
-            testimonialImage.src = testimonial.image;
-            testimonialImage.alt = testimonial.imageAlt;
-            
-            // Start fade in animations
-            quoteElement.style.animation = 'fadeInRight 1s ease forwards';
-            authorInfo.style.animation = 'fadeInRight 1s ease forwards';
-            testimonialImage.style.animation = 'fadeInRight 1s ease forwards';
+            // Start fade in animation
+            quoteElement.style.opacity = '1';
+            authorNameElement.style.opacity = '1';
+            authorRoleElement.style.opacity = '1';
             
             // Update index for next rotation
             currentIndex = (currentIndex + 1) % testimonials.length;
@@ -101,16 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Set initial testimonial
     const initialTestimonial = testimonials[0];
-    quoteElement.innerHTML = initialTestimonial.quote;
-    document.querySelector('.author-details h3').textContent = initialTestimonial.author;
-    document.querySelector('.author-details p').innerHTML = initialTestimonial.role;
-    
-    const avatar = document.querySelector('.author-avatar');
-    avatar.src = initialTestimonial.avatar;
-    avatar.alt = initialTestimonial.author;
-    
-    testimonialImage.src = initialTestimonial.image;
-    testimonialImage.alt = initialTestimonial.imageAlt;
+    quoteElement.innerHTML = `"${initialTestimonial.quote}"`;
+    authorNameElement.textContent = initialTestimonial.author;
+    authorRoleElement.innerHTML = initialTestimonial.role;
     
     // Rotate testimonials every 5 seconds
     setInterval(updateTestimonial, 5000);

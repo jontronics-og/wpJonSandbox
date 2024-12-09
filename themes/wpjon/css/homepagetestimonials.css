@@ -114,6 +114,8 @@
     background: #cbd5e1;
 }
 
+
+
 @keyframes fadeInRight {
     0% {
         opacity: 0;
@@ -134,4 +136,50 @@
         opacity: 0;
         transform: translateX(-30px);
     }
+}
+
+
+
+@media (max-width: 768px) {
+    
+    .testimonials-section h2 {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 16px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .testimonial-text blockquote {
+        font-size: 18px;
+        line-height: 1.4;
+        margin-bottom: 40px;
+        animation: fadeInRight 1s ease forwards;
+    }
+
+    .testimonial-card {
+        background: linear-gradient(to right bottom, #F3F4F6, #FFFFFF);
+        border-radius: 24px;
+        padding: 10px;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    .details h3 {
+        font-size: 36px;
+        line-height: 1.6rem;
+        font-weight: bold;
+    }
+
+    
+}
+
+.testimonial-text blockquote,
+.author-details h3,
+.author-details p {
+    transition: opacity 1s ease-in-out;
 }
