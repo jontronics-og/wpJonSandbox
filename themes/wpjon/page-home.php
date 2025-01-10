@@ -123,6 +123,122 @@ get_header(); ?>
    </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+<?php
+$args = array(
+    'post_type' => 'workwork',
+    'post__in' => array(87, 89),    // Specific post IDs
+    'orderby' => 'post__in',        // Maintain the exact order specified
+    'posts_per_page' => 2           // Show only 2 posts
+);
+$work_query = new WP_Query($args);
+?>
+
+<div class="cw-container">
+   <div class="header">
+       <h2>Enterprise WordPress Solutions</h2>
+       <p>Discover a collection of enterprise-level WordPress websites I engineered and maintained for leading organizations. These projects showcase my expertise in developing custom themes, optimizing performance, and ensuring seamless functionality for high-traffic business platforms.</p>
+   </div>
+   <div class="cw-grid">
+       <?php 
+       if($work_query->have_posts()) : 
+           while($work_query->have_posts()) : $work_query->the_post();
+               $image = get_field('upload_image');
+               $work_url = get_field('link_to_work_site');
+       ?>
+           <a href="<?php echo esc_url($work_url); ?>" class="cw-card" target="_blank">
+               <?php if($image) : ?>
+               <div class="cw-card-image">
+                   <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+               </div>
+               <?php endif; ?>
+
+               <div class="cw-card-content">
+                   <h3 class="cw-card-title"><?php the_title(); ?></h3>
+                   <span class="cw-read-more">View Website</span>
+               </div>
+           </a>
+       <?php 
+           endwhile;
+           wp_reset_postdata();
+       endif; 
+       ?>
+   </div>
+</div>
+<?php ?>
+
+<?php
+$args = array(
+   'post_type' => 'workwork',
+   'post__in' => array(91, 92, 96, 98),    // Specific post IDs
+   'orderby' => 'post__in',        // Maintain the exact order specified
+   'posts_per_page' => 4           // Show only 4 posts
+);
+
+$work_query = new WP_Query($args);
+?>
+
+<div class="cw-container">
+   <div class="header">
+       <h2>Building Unique WordPress Experiences for Startups, Small Business Sites & Personal Sandbox Testing sites.</h2>
+       <p>Explore a collection of WordPress websites I engineered and maintained for small businesses, startups, and personal projects. These examples showcase my expertise in developing custom themes, optimizing performance, and creating scalable solutions for diverse business needs and testing environments.</p>
+   </div>
+   <div class="cw-grid">
+       <?php 
+       if($work_query->have_posts()) : 
+           while($work_query->have_posts()) : $work_query->the_post();
+               $image = get_field('upload_image');
+               $work_url = get_field('link_to_work_site');
+       ?>
+           <a href="<?php echo esc_url($work_url); ?>" class="cw-card" target="_blank">
+               <?php if($image) : ?>
+               <div class="cw-card-image">
+                   <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+               </div>
+               <?php endif; ?>
+
+               <div class="cw-card-content">
+                   <h3 class="cw-card-title"><?php the_title(); ?></h3>
+                   <span class="cw-read-more">View Website</span>
+               </div>
+           </a>
+       <?php 
+           endwhile;
+           wp_reset_postdata();
+       endif; 
+       ?>
+   </div>
+</div>
+<?php ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section class="testimonials-section">
     <div class="dot-background"></div>
     <div class="testimonials-content">
@@ -144,6 +260,8 @@ get_header(); ?>
         </div>
     </div>
 </section>
+
+
 
 <!-- Services Section -->
 <!-- <section class="services">
