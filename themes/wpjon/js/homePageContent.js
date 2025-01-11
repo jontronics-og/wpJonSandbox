@@ -1,106 +1,31 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     const allowedDomains = [
-//         'wpjonsandbox.local',
-//         'wpjon.wpenginepowered.com',
-//         'wpjonstg.wpenginepowered.com'
-//     ];
-    
-//     const currentDomain = window.location.hostname;
-//     const WORDPRESS_URL = `http://${currentDomain}`;
-    
-//     if (!allowedDomains.includes(currentDomain)) return;
-    
-//     async function fetchPosts() {
-//         try {
-//             const response = await fetch(`${WORDPRESS_URL}/wp-json/wp/v2/posts?_embed&per_page=100`);
-//             return await response.json();
-//         } catch (error) {
-//             return [];
-//         }
-//     }
- 
-//     function createCards(posts) {
-//         const cardGrid = document.getElementById('card-grid');
-//         cardGrid.innerHTML = '';
-        
-//         posts.forEach(post => {
-//             if (!post._embedded?.['wp:term']) return;
- 
-//             const card = document.createElement('div');
-//             card.className = 'content-card';
-//             const categories = post._embedded['wp:term'][0];
-            
-//             if (categories?.length) {
-//                 const categoryName = categories[0].name;
-//                 const categoryId = categories[0].id.toString();
-                
-//                 card.innerHTML = `
-//                     <div class="icon ${getCategoryColor(categoryId)}">${categoryName}</div>
-//                     <p class="card-text">${post.title.rendered}</p>
-//                 `;
-                
-//                 card.dataset.categoryId = categoryId;
-//                 cardGrid.appendChild(card);
-//             }
-//         });
-//     }
- 
-//     function getCategoryColor(categoryId) {
-//         switch(categoryId) {
-//             case '7': return 'pink';   
-//             case '9': return 'green';  
-//             case '8': return 'blue';   
-//             default: return 'pink';
-//         }
-//     }
- 
-//     document.querySelectorAll('.tag').forEach(tag => {
-//         tag.addEventListener('click', () => {
-//             const selectedCategoryId = tag.dataset.categoryId;
-//             filterCards(selectedCategoryId);
-//             document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
-//             tag.classList.add('active');
-//         });
-//     });
- 
-//     function filterCards(categoryId) {
-//         const cards = document.querySelectorAll('.content-card');
-        
-//         cards.forEach(card => {
-//             card.style.opacity = '0';
-//             setTimeout(() => {
-//                 const cardCategoryId = card.dataset.categoryId;
-//                 if (categoryId === '10' || cardCategoryId === categoryId) {
-//                     card.classList.remove('hidden');
-//                     card.style.opacity = '1';
-//                 } else {
-//                     card.classList.add('hidden');
-//                 }
-//             }, 300);
-//         });
-//     }
- 
-//     fetchPosts().then(createCards);
-//  });
-
-
-// homepageContent.js
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
+    // Declare variables first
     const allowedDomains = [
         'wpjonsandbox.local',
-        'wpjon.wpenginepowered.com',
-        'wpjonstg.wpenginepowered.com'
+        'wpjon.wpenginepowered.com', 
+        'wpjonstg.wpenginepowered.com',
+        'wpjon.info',
+        'www.wpjon.info'
     ];
     
     const currentDomain = window.location.hostname;
-    const WORDPRESS_URL = `http://${currentDomain}`;
+    const WORDPRESS_URL = `${window.location.protocol}//${currentDomain}`;
     const ITEMS_PER_PAGE = 8;
     let currentPage = 1;
     let allPosts = [];
     let originalPosts = [];
     
-    if (!allowedDomains.includes(currentDomain)) return;
+    // Debug logging
+    console.log('Current Domain:', currentDomain);
+    console.log('WordPress URL:', WORDPRESS_URL);
+    console.log('API endpoint:', `${WORDPRESS_URL}/wp-json/wp/v2/posts?_embed&per_page=100`);
     
+    // Check domain
+    if (!allowedDomains.includes(currentDomain)) {
+        console.log('Domain not allowed:', currentDomain);
+        return;
+    }
+ 
     async function fetchPosts() {
         try {
             const response = await fetch(`${WORDPRESS_URL}/wp-json/wp/v2/posts?_embed&per_page=100`);
@@ -108,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             allPosts = originalPosts;
             return getPagePosts(1);
         } catch (error) {
+            console.error('Fetch error:', error);
             return [];
         }
     }
@@ -142,7 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
  
         const cardGrid = document.getElementById('card-grid');
-        cardGrid.parentNode.insertBefore(paginationContainer, cardGrid.nextSibling);
+        if (cardGrid && cardGrid.parentNode) {
+            cardGrid.parentNode.insertBefore(paginationContainer, cardGrid.nextSibling);
+        }
     }
  
     function loadPage(page) {
@@ -157,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
  
     function createCards(posts) {
         const cardGrid = document.getElementById('card-grid');
+        if (!cardGrid) return;
+        
         cardGrid.innerHTML = '';
         
         posts.forEach((post, index) => {
@@ -171,18 +101,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const categoryId = categories[0].id.toString();
                 
                 card.innerHTML = `
-    <a href="${post.link}" class="card-link">
-        <div class="icon ${getCategoryColor(categoryId)}">${categoryName}</div>
-        <p class="card-text">${post.title.rendered}</p>
-        <div class="read-more">
-            <span class="wave-text">
-                ${Array.from('Read More →').map((char, index) => 
-                    `<span class="wave-letter" style="--i: ${index}">${char === ' ' ? '&nbsp;' : char}</span>`
-                ).join('')}
-            </span>
-        </div>
-    </a>
-`;
+                    <a href="${post.link}" class="card-link">
+                        <div class="icon ${getCategoryColor(categoryId)}">${categoryName}</div>
+                        <p class="card-text">${post.title.rendered}</p>
+                        <div class="read-more">
+                            <span class="wave-text">
+                                ${Array.from('Read More →').map((char, i) => 
+                                    `<span class="wave-letter" style="--i: ${i}">${char === ' ' ? '&nbsp;' : char}</span>`
+                                ).join('')}
+                            </span>
+                        </div>
+                    </a>`;
                 
                 card.dataset.categoryId = categoryId;
                 cardGrid.appendChild(card);
@@ -247,31 +176,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
  
+    // Initialize
     fetchPosts().then(posts => {
+        console.log('Posts fetched:', posts);
         createCards(posts);
         createPagination();
         observeCards();
         initWaveLetters();
+    }).catch(error => {
+        console.error('Error initializing posts:', error);
     });
  });
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
