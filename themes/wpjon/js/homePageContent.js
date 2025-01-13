@@ -1,3 +1,30 @@
+
+
+
+// Add this to your existing JS file
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we arrived with a hash in the URL
+    if (window.location.hash === '#latest-insights') {
+        const element = document.getElementById('latest-insights');
+        if (element) {
+            // Add a slight delay to ensure all content is loaded
+            setTimeout(() => {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+    }
+});
+
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Declare variables first
     const allowedDomains = [
@@ -124,6 +151,15 @@ document.addEventListener('DOMContentLoaded', function() {
             case '7': return 'pink';   
             case '9': return 'green';  
             case '8': return 'blue';   
+            case '11': return 'red';
+            case '': return 'purple';
+            case '': return 'teal';
+            case '': return 'red';
+            case '': return 'indigo';
+            case '': return 'yellow';
+            case '': return 'rose';
+            case '': return 'cyan';
+            case '': return 'lime';
             default: return 'pink';
         }
     }
@@ -161,8 +197,8 @@ document.addEventListener('DOMContentLoaded', function() {
             allPosts = originalPosts;
         } else {
             allPosts = originalPosts.filter(post => {
-                const postCategory = post._embedded['wp:term'][0][0];
-                return postCategory.id.toString() === categoryId;
+                const postCategories = post._embedded['wp:term'][0];
+                return postCategories.some(category => category.id.toString() === categoryId);
             });
         }
         loadPage(1);

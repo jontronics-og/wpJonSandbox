@@ -70,15 +70,15 @@ get_header(); ?>
                 $services = [
                     'rds' => [
                         'icon' => 'http://wpjon.wpenginepowered.com/wp-content/uploads/2024/11/web-design.png',
-                        'label' => 'UX/UI Design'
+                        'label' => 'UX/UI<br>Design'
                     ],
                     'ec2' => [
                         'icon' => 'http://wpjon.wpenginepowered.com/wp-content/uploads/2024/11/seo.png',
-                        'label' => 'Technical SEO'
+                        'label' => 'Technical<br>SEO'
                     ],
                     's3' => [
                         'icon' => 'http://wpjon.wpenginepowered.com/wp-content/uploads/2024/11/data.png',
-                        'label' => 'WordPress Development'
+                        'label' => 'WordPress<br>Development'
                     ],
                     'lambda' => [
                         'icon' => 'http://wpjon.wpenginepowered.com/wp-content/uploads/2024/11/customer-support.png',
@@ -86,7 +86,7 @@ get_header(); ?>
                     ],
                     'cloudwatch' => [
                         'icon' => 'http://wpjon.wpenginepowered.com/wp-content/uploads/2024/11/project-management.png',
-                        'label' => 'Project Management'
+                        'label' => 'Project<br>Management'
                     ]
                 ];
 
@@ -98,11 +98,11 @@ get_header(); ?>
                             </svg>
                             <div class="support-icon">
                                 <img src="<?php echo esc_url($service['icon']); ?>" 
-                                     alt="<?php echo esc_attr($service['label']); ?> Icon">
+                                     alt="<?php echo esc_attr(strip_tags($service['label'])); ?> Icon">
                             </div>
                             <div class="check-mark">✓</div>
                         </div>
-                        <div class="service-label"><?php echo esc_html($service['label']); ?></div>
+                        <div class="service-label"><?php echo wp_kses_post($service['label']); ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -110,35 +110,27 @@ get_header(); ?>
     </div>
 </section>
 
-<div class="container">
+<!-- Latest Insights Section -->
+<div id="latest-insights" class="container">
    <div class="header">
-   <h2>Latest Insights & Projects</h2>
-   <p>Dive into my journey as a WordPress developer through technical deep-dives, project case studies, and development best practices. Here I share my hands-on experience building scalable WordPress solutions and tackling real-world development challenges.</p>
+       <h2>Latest Insights & Projects</h2>
+       <p>Dive into my journey as a WordPress developer through technical deep-dives, project case studies, and development best practices. Here I share my hands-on experience building scalable WordPress solutions and tackling real-world development challenges.</p>
        <div class="tag active" data-category-id="10">All</div>
        <div class="tag" data-category-id="7">Wordpress Development</div>
        <div class="tag" data-category-id="9">UX/UI</div>
        <div class="tag" data-category-id="8">Technical SEO</div>
+       <div class="tag" data-category-id="11">WP-Dev: WP REST API</div>  
    </div>
-   <div id="card-grid" class="grid">
-   </div>
+   <div id="card-grid" class="grid"></div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
+<!-- Enterprise Solutions Section -->
 <?php
 $args = array(
     'post_type' => 'workwork',
-    'post__in' => array(87, 89),    // Specific post IDs
-    'orderby' => 'post__in',        // Maintain the exact order specified
-    'posts_per_page' => 2           // Show only 2 posts
+    'post__in' => array(87, 89),
+    'orderby' => 'post__in',
+    'posts_per_page' => 2
 );
 $work_query = new WP_Query($args);
 ?>
@@ -174,14 +166,14 @@ $work_query = new WP_Query($args);
        ?>
    </div>
 </div>
-<?php ?>
 
+<!-- Small Business Solutions Section -->
 <?php
 $args = array(
    'post_type' => 'workwork',
-   'post__in' => array(91, 92, 96, 98),    // Specific post IDs
-   'orderby' => 'post__in',        // Maintain the exact order specified
-   'posts_per_page' => 4           // Show only 4 posts
+   'post__in' => array(91, 92, 96, 98),
+   'orderby' => 'post__in',
+   'posts_per_page' => 4
 );
 
 $work_query = new WP_Query($args);
@@ -218,27 +210,8 @@ $work_query = new WP_Query($args);
        ?>
    </div>
 </div>
-<?php ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- Testimonials Section -->
 <section class="testimonials-section">
     <div class="dot-background"></div>
     <div class="testimonials-content">
@@ -260,78 +233,5 @@ $work_query = new WP_Query($args);
         </div>
     </div>
 </section>
-
-
-
-<!-- Services Section -->
-<!-- <section class="services">
-    <div class="container">
-        
-        <?php /* if (is_active_sidebar('services-1')) : ?>
-            <div class="services-item">
-                <?php dynamic_sidebar('services-1'); ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if (is_active_sidebar('services-2')) : ?>
-            <div class="services-item">
-                <?php dynamic_sidebar('services-2'); ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if (is_active_sidebar('services-3')) : ?>
-            <div class="services-item">
-                <?php dynamic_sidebar('services-3'); ?>
-            </div>
-        <?php endif;*/ ?>
-    </div>
-</section> -->
-
-<!-- Blog Section -->
-<?php /*
-$args = array(
-    'post_type' => 'post',
-    'posts_per_page' => 5,
-    'category__in' => array(4, 5, 6),
-    'category__not_in' => array(1)
-);
-
-$recent_posts = new WP_Query($args);
-
-if ($recent_posts->have_posts()) : ?>
-    <section class="home-blog">
-        <h2>Featured Posts</h2>
-        <div class="container">
-            <?php while ($recent_posts->have_posts()) : $recent_posts->the_post(); ?>
-                <article class="latest-news">
-                    <?php if (has_post_thumbnail()) : ?>
-                        <a href="<?php the_permalink(); ?>">
-                            <?php the_post_thumbnail('large'); ?>
-                        </a>
-                    <?php endif; ?>
-                    
-                    <h3>
-                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                    </h3>
-                    
-                    <div class="meta-info">
-                        <p>
-                            by <span><?php the_author_posts_link(); ?></span>
-                            Categories: <span><?php the_category(' '); ?></span>
-                            <?php if (has_tag()) : ?>
-                                Tags: <?php the_tags('', ', '); ?>
-                            <?php endif; ?>
-                        </p>
-                        <p><span><?php echo get_the_date(); ?></span></p>
-                    </div>
-                    
-                    <?php the_excerpt(); ?>
-                </article>
-            <?php endwhile; ?>
-        </div>
-    </section>
-    <?php 
-    wp_reset_postdata();
-endif; */ ?> 
 
 <?php get_footer(); ?>

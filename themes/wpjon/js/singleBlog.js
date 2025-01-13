@@ -1,4 +1,4 @@
-// Add this to your theme's js file or enqueue it separately
+
 function initSmoothScroll() {
     document.querySelectorAll('.table-of-contents a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {

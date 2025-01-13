@@ -47,13 +47,13 @@
             <div class="wpj-mobile-menu">
                 <button class="close-menu" aria-label="Close menu">×</button>
                 <div class="wpj-mobile-menu-content">
-                    <?php wp_nav_menu(array(
+                    <?php /* wp_nav_menu(array(
                         'theme_location' => 'wp_jon_main_menu',
                         'depth' => 2,
                         'container' => false,
                         'menu_class' => 'wpj-mobile-nav-links',
                         'fallback_cb' => false
-                    )); ?>
+                    ));*/ ?>
                     <div class="wpj-mobile-cta-group">
                         <a href="tel:+13474320497" class="wpj-mobile-cta-button">
                             <i class="fa-solid fa-phone"></i>

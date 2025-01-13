@@ -1,57 +1,75 @@
+// Select all necessary elements
+const mobileMenu = document.querySelector(".wpj-mobile-menu"),
+      menuToggle = document.querySelector(".wpj-mobile-menu-toggle"),
+      closeButton = document.querySelector(".close-menu"),
+      hamburgerLines = document.querySelector(".hamburger-lines"),
+      body = document.body;
 
+// Function to open menu
+function openMenu() {
+    mobileMenu.classList.add("active");
+    body.classList.add("menu-open");
+    body.style.overflow = "hidden"; // Prevent background scrolling
+}
 
-// Select the first HTML element with the class 'menu' and store it in the variable 'dropdown'.
-// This is expected to be a <ul> element.
-let dropdown = document.querySelector('.menu'); // <ul>
+// Function to close menu
+function closeMenu() {
+    mobileMenu.classList.remove("active");
+    body.classList.remove("menu-open");
+    body.style.overflow = ""; // Restore scrolling
+}
 
-// Select the first HTML element with the class 'sub-menu' and store it in the variable 'submenu'.
-// This is expected to be a child of <ul> or <li>, possibly containing links.
-let submenu = document.querySelector('.sub-menu'); // <ul> <li> <a>
+// Add click event listeners
+if (menuToggle) {
+    menuToggle.addEventListener("click", openMenu);
+}
 
-// Select the first HTML element with the class 'check-button' and store it in the variable 'buttonClick'.
-// This is expected to be a button that will trigger the dropdown menu behavior.
-let buttonClick = document.querySelector('.check-button'); // <button>
+if (closeButton) {
+    closeButton.addEventListener("click", closeMenu);
+}
 
-// Select the first HTML element with the class 'menu-icon' and store it in the variable 'hamburger'.
-// This is expected to be an icon, such as a hamburger menu icon.
-let hamburger = document.querySelector('.menu-icon'); // Icon element
-
-// Add a click event listener to the 'buttonClick' element.
-// When the button is clicked, the anonymous function (arrow function) will execute.
-buttonClick.addEventListener('click', () => {
-    // Toggle the class 'show-dropdown' on the 'dropdown' element.
-    // If the class is already there, it will be removed; otherwise, it will be added.
-    dropdown.classList.toggle('show-dropdown');
-
-    // Check if 'submenu' exists (not null or undefined).
-    if (submenu) {
-        // If 'submenu' exists, toggle the class 'show-dropdown' on it as well.
-        submenu.classList.toggle('show-dropdown');
+// Close menu when clicking outside
+document.addEventListener("click", (e) => {
+    if (mobileMenu && mobileMenu.classList.contains("active")) {
+        // Check if click is outside the mobile menu content
+        if (!e.target.closest(".wpj-mobile-menu-content") && 
+            !e.target.closest(".wpj-mobile-menu-toggle")) {
+            closeMenu();
+        }
     }
-
-    // Toggle the class 'animate-button' on the 'hamburger' element.
-    // This is likely used to animate the menu icon when the dropdown is toggled.
-    hamburger.classList.toggle('animate-button');
 });
 
+// Handle escape key
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu && mobileMenu.classList.contains("active")) {
+        closeMenu();
+    }
+});
 
+// Prevent clicks inside menu from bubbling to document
+if (mobileMenu) {
+    mobileMenu.addEventListener("click", (e) => {
+        if (e.target.closest(".wpj-mobile-menu-content")) {
+            e.stopPropagation();
+        }
+    });
+}
 
+// Handle mobile menu links
+const mobileMenuLinks = document.querySelectorAll(".wpj-mobile-nav-links a");
+mobileMenuLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        closeMenu();
+    });
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Handle resize events
+let resizeTimer;
+window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        if (window.innerWidth > 768) { // Adjust breakpoint as needed
+            closeMenu();
+        }
+    }, 250);
+});

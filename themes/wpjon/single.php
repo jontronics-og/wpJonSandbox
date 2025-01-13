@@ -1,49 +1,51 @@
-<?php
-/**
- * Template Name: Single Blog Post
- * 
- * This is the template that displays single blog posts.
- */
-
-get_header(); ?>
+<?php get_header(); ?>
 
 <main class="main-content">
-    <article>
-        <?php
-        while ( have_posts() ) :
-            the_post();
-        ?>
-            <header class="article-header">
-                <h1 class="single-blog"><?php the_title(); ?></h1>
-                <div class="article-meta">
-                    <span>By <?php the_author(); ?></span> 
-                    
-                    <?php if (function_exists('get_reading_time')) : ?>
-                        • <span><?php echo get_reading_time(); ?></span>
-                    <?php endif; ?>
-                </div>
-                <div class="share-buttons">
-                <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>" class="share-button">Share on Twitter</a>
-    
-                 </div>
-            </header>
+    <?php while (have_posts()) : the_post(); ?>
+        <!-- Main Content Column -->
+        <article class="blog-post">
+            <!-- Breadcrumb Navigation -->
+            <div class="breadcrumb-nav">
+                <a href="<?php echo home_url('/#latest-insights'); ?>">
+                    <span class="arrow">←</span> Home
+                </a>
+            </div>
 
+            <!-- Title Section -->
+            <h1 class="blog-title"><?php the_title(); ?></h1>
+            
+            <!-- Meta Section -->
+          
+            <div class="post-meta">
+                <span>By <?php 
+                $author_email = get_the_author_meta('email');
+                if($author_email === 'jon.wordpress.dev@gmail.com') {
+                    echo 'Jonathan Aquarone';
+                } else {
+                    echo esc_html(get_the_author_meta('display_name'));
+                }
+                ?></span>
+                <span>•</span>
+            </div>
+
+            <!-- Featured Image -->
             <?php if (has_post_thumbnail()) : ?>
-                <div class="featured-image-container">
+                <div class="featured-image-wrapper">
                     <?php the_post_thumbnail('full', array('class' => 'featured-image')); ?>
                 </div>
             <?php endif; ?>
 
-
+            <!-- Content -->
             <div class="post-content">
                 <?php the_content(); ?>
             </div>
+        </article>
 
-            
-
-
-        <?php endwhile; ?>
-    </article>
+        <!-- Sidebar Column -->
+        <aside class="sidebar">
+            <!-- Your sticky sidebar content will go here -->
+        </aside>
+    <?php endwhile; ?>
 </main>
 
 <?php get_footer(); ?>
