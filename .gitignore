@@ -25,10 +25,16 @@ Thumbs.db
 #---------------------------
 # WordPress plugins
 #---------------------------
-/plugins/*
+
+# WordPress plugins directory - ignore everything
+wp-content/plugins/*
+
+# But don't ignore the plugins directory itself
+!wp-content/plugins/
+!wp-content/plugins/index.php
 
 # DO NOT ignore these plugins...
-!/plugins/wordpress-seo
+
 
 # WordPress specific
 wp-content/nitropack

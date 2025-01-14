@@ -236,6 +236,21 @@ h5 {
 .cyan { background: rgba(34, 211, 238, 0.2); }
 .lime { background: rgba(163, 230, 53, 0.2); }
 
+
+
+
+
+.wp-block-heading {
+    line-height: 2.5rem !important;
+    color: #4b5563;
+}
+
+
+
+
+
+
+
 /* Responsive styles */
 @media (max-width: 1024px) {
     .main-content {

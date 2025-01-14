@@ -88,3 +88,16 @@
         min-height: 180px;
     }
 }
+
+
+.category-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+    margin-bottom: 16px;
+}
+
+.icon {
+    display: inline-block;
+    white-space: nowrap;
+}

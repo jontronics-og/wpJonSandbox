@@ -18,6 +18,7 @@
     font-size: 48px;
     font-weight: bold;
     margin-bottom: 16px;
+    line-height: 2.5rem !important;
 }
 
 .testimonials-section > p {
@@ -148,6 +149,7 @@
         font-size: 32px;
         font-weight: bold;
         margin-bottom: 16px;
+        line-height: 2.5rem !important;
     }
 
     p {
@@ -169,6 +171,7 @@
 
     h2 {
         margin-bottom: 10px;
+        line-height: 2.5rem !important;
     }
 
     .details h3 {

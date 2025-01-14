@@ -1,13 +1,8 @@
-
-
-
-// Add this to your existing JS file
 document.addEventListener('DOMContentLoaded', function() {
     // Check if we arrived with a hash in the URL
     if (window.location.hash === '#latest-insights') {
         const element = document.getElementById('latest-insights');
         if (element) {
-            // Add a slight delay to ensure all content is loaded
             setTimeout(() => {
                 element.scrollIntoView({ 
                     behavior: 'smooth',
@@ -16,16 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         }
     }
-});
 
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
     // Declare variables first
     const allowedDomains = [
         'wpjonsandbox.local',
@@ -41,17 +27,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentPage = 1;
     let allPosts = [];
     let originalPosts = [];
+    let selectedCategories = new Set();
     
     // Debug logging
-    console.log('Current Domain:', currentDomain);
-    console.log('WordPress URL:', WORDPRESS_URL);
-    console.log('API endpoint:', `${WORDPRESS_URL}/wp-json/wp/v2/posts?_embed&per_page=100`);
+    // console.log('Current Domain:', currentDomain);
+    // console.log('WordPress URL:', WORDPRESS_URL);
+    // console.log('API endpoint:', `${WORDPRESS_URL}/wp-json/wp/v2/posts?_embed&per_page=100`);
     
     // Check domain
-    if (!allowedDomains.includes(currentDomain)) {
-        console.log('Domain not allowed:', currentDomain);
-        return;
-    }
+    // if (!allowedDomains.includes(currentDomain)) {
+    //     console.log('Domain not allowed:', currentDomain);
+    //     return;
+    // }
  
     async function fetchPosts() {
         try {
@@ -124,12 +111,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const categories = post._embedded['wp:term'][0];
             
             if (categories?.length) {
-                const categoryName = categories[0].name;
-                const categoryId = categories[0].id.toString();
+                // Find the primary category (non-Apps)
+                const primaryCat = categories.find(cat => cat.id !== 12);
+                const appsCat = categories.find(cat => cat.id === 12);
+                
+                let categoryIcons = `<div class="category-row">`;
+                if (primaryCat) {
+                    categoryIcons += `<div class="icon ${getCategoryColor(primaryCat.id.toString())}">${primaryCat.name}</div>`;
+                }
+                if (appsCat) {
+                    categoryIcons += `<div class="icon ${getCategoryColor('12')}">${appsCat.name}</div>`;
+                }
+                categoryIcons += '</div>';
                 
                 card.innerHTML = `
                     <a href="${post.link}" class="card-link">
-                        <div class="icon ${getCategoryColor(categoryId)}">${categoryName}</div>
+                        ${categoryIcons}
                         <p class="card-text">${post.title.rendered}</p>
                         <div class="read-more">
                             <span class="wave-text">
@@ -140,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </a>`;
                 
-                card.dataset.categoryId = categoryId;
+                card.dataset.categoryId = primaryCat ? primaryCat.id.toString() : categories[0].id.toString();
                 cardGrid.appendChild(card);
             }
         });
@@ -148,11 +145,11 @@ document.addEventListener('DOMContentLoaded', function() {
  
     function getCategoryColor(categoryId) {
         switch(categoryId) {
-            case '7': return 'pink';   
-            case '9': return 'green';  
-            case '8': return 'blue';   
-            case '11': return 'red';
-            case '': return 'purple';
+            case '7': return 'pink';   // WordPress Development
+            case '9': return 'green';  // UX/UI
+            case '8': return 'blue';   // Technical SEO
+            case '11': return 'red';   // WP-Dev: WP REST API
+            case '12': return 'purple'; // Apps
             case '': return 'teal';
             case '': return 'red';
             case '': return 'indigo';
@@ -181,26 +178,72 @@ document.addEventListener('DOMContentLoaded', function() {
         cards.forEach(card => observer.observe(card));
     }
  
+    // Updated tag click event listener
     document.querySelectorAll('.tag').forEach(tag => {
         tag.addEventListener('click', () => {
             const selectedCategoryId = tag.dataset.categoryId;
-            filterCards(selectedCategoryId);
-            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
-            tag.classList.add('active');
+            
+            // Handle "All" category
+            if (selectedCategoryId === '10') {
+                selectedCategories.clear();
+                document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+            } else {
+                // Remove "All" selection if it exists
+                document.querySelector('[data-category-id="10"]').classList.remove('active');
+                
+                // Toggle category selection
+                if (tag.classList.contains('active')) {
+                    tag.classList.remove('active');
+                    selectedCategories.delete(selectedCategoryId);
+                } else {
+                    tag.classList.add('active');
+                    selectedCategories.add(selectedCategoryId);
+                }
+                
+                // If no categories selected, activate "All"
+                if (selectedCategories.size === 0) {
+                    document.querySelector('[data-category-id="10"]').classList.add('active');
+                }
+            }
+            
+            filterCards();
         });
     });
  
-    function filterCards(categoryId) {
+   
+    function filterCards() {
         currentPage = 1;
         
-        if (categoryId === '10') {
+        if (selectedCategories.size === 0) {
+            // Show all posts when no specific category is selected
             allPosts = originalPosts;
         } else {
+            // Filter posts based on selected categories
             allPosts = originalPosts.filter(post => {
                 const postCategories = post._embedded['wp:term'][0];
-                return postCategories.some(category => category.id.toString() === categoryId);
+                const postCategoryIds = postCategories.map(cat => cat.id.toString());
+                
+                // If only Apps is selected, show all posts with Apps category
+                if (selectedCategories.size === 1 && selectedCategories.has('12')) {
+                    return postCategoryIds.includes('12');
+                }
+                
+                // If Apps is selected along with other categories
+                if (selectedCategories.has('12')) {
+                    return postCategoryIds.includes('12') && 
+                           Array.from(selectedCategories)
+                               .filter(id => id !== '12')
+                               .some(id => postCategoryIds.includes(id));
+                }
+                
+                // Normal filtering for non-Apps categories
+                return Array.from(selectedCategories).every(selectedCatId => 
+                    postCategoryIds.includes(selectedCatId)
+                );
             });
         }
+        
         loadPage(1);
     }
  
@@ -222,4 +265,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }).catch(error => {
         console.error('Error initializing posts:', error);
     });
- });
+});

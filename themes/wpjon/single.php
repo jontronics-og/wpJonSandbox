@@ -7,7 +7,7 @@
             <!-- Breadcrumb Navigation -->
             <div class="breadcrumb-nav">
                 <a href="<?php echo home_url('/#latest-insights'); ?>">
-                    <span class="arrow">←</span> Home
+                    <span class="arrow">←</span> Latest Insights & Projects
                 </a>
             </div>
 

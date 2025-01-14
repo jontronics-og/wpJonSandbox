@@ -286,7 +286,8 @@
 
 .service-label {
     position: absolute;
-    bottom: -45px;
+    padding-top: 15px;
+    /* bottom: -45px; */
     left: 50%;
     transform: translateX(-50%);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -301,10 +302,21 @@
 
 @media (max-width: 768px) {
     .service-label {
+        padding-top: 15px;
         max-width: 80px; /* Slightly smaller for mobile */
         line-height: 1.2; /* Better spacing between lines */
         font-size: 12px; /* Slightly smaller font */
-        bottom: -32px; /* More space for two lines */
+        /* bottom: -45px; */
+    }
+}
+
+.support-label {
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .support-label  {
+        display: inline-block;
     }
 }
 
