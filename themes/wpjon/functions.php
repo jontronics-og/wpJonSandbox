@@ -292,3 +292,352 @@ add_filter('the_content', 'add_ids_to_headings', 99);
 add_filter('acf/settings/rest_api_format', function () {
     return 'standard';
 });
+
+// // Custom REST API endpoint for filtered posts
+// add_action('rest_api_init', function () {
+//     register_rest_route('wpjon/v1', '/filtered-posts', [
+//         'methods' => 'GET',
+//         'callback' => 'get_filtered_posts',
+//         'permission_callback' => '__return_true',
+//         'args' => [
+//             'categories' => [
+//                 'required' => false,
+//                 'sanitize_callback' => function($param) {
+//                     return array_map('absint', explode(',', $param));
+//                 }
+//             ],
+//             'page' => [
+//                 'default' => 1,
+//                 'sanitize_callback' => 'absint'
+//             ],
+//             'per_page' => [
+//                 'default' => 8,
+//                 'sanitize_callback' => 'absint'
+//             ]
+//         ]
+//     ]);
+// });
+
+// function format_post($post_id) {
+//     $post = get_post($post_id);
+//     $categories = get_the_category($post_id);
+    
+//     return [
+//         'id' => $post_id,
+//         'title' => get_the_title($post_id),
+//         'link' => get_permalink($post_id),
+//         'categories' => array_map(function($cat) {
+//             return [
+//                 'id' => $cat->term_id,
+//                 'name' => $cat->name,
+//                 'slug' => $cat->slug
+//             ];
+//         }, $categories)
+//     ];
+// }
+
+// function get_filtered_posts($request) {
+//     $categories = $request->get_param('categories');
+//     $page = $request->get_param('page');
+//     $per_page = $request->get_param('per_page');
+    
+//     $args = [
+//         'post_type' => 'post',
+//         'posts_per_page' => $per_page,
+//         'paged' => $page,
+//         'fields' => 'ids'
+//     ];
+    
+//     if ($categories && !empty($categories)) {
+//         $args['tax_query'] = array(
+//             'relation' => 'OR',  // Shows posts from ANY selected category
+//             array(
+//                 'taxonomy' => 'category',
+//                 'field'    => 'term_id',
+//                 'terms'    => $categories
+//             )
+//         );
+//     }
+    
+//     $query = new WP_Query($args);
+    
+//     return rest_ensure_response([
+//         'posts' => array_map('format_post', $query->posts),
+//         'total' => $query->found_posts,
+//         'total_pages' => ceil($query->found_posts / $per_page)
+//     ]);
+// }
+
+
+
+
+
+//** Surfer APP */
+
+
+
+// Load the REST API controller
+require_once get_template_directory() . '/inc/class-ny-surf-conditions-api.php';
+
+// Register shortcode
+function surf_conditions_shortcode() {
+    ob_start(); ?>
+        <div class="page-wrapper">
+            <div class="content-container">
+                <h1 class="page-title">NY SURF CONDITIONS</h1>
+                <p class="page-description">Only Ten API calls a day - Check Early Morning</p>
+                <div class="button-timer-container">
+                    <div class="button-group">
+                        <button id="checkSurfBtn" class="check-surf-btn">
+                            Check Surf Conditions
+                        </button>
+                        <button id="lastCheckedBtn" class="last-checked-btn" disabled>
+                            Not checked yet
+                        </button>
+                    </div>
+                </div>
+                <div id="surfResults" class="surf-results"></div>
+            </div>
+        </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('surf_conditions', 'surf_conditions_shortcode');
+
+
+
+
+function wpjon_enqueue_surf_app_assets() {
+    $theme_dir = get_template_directory();
+    $theme_uri = get_template_directory_uri();
+
+    // CSS
+    wp_enqueue_style(
+        'surf-test', 
+        $theme_uri . '/css/surf-app.css'
+    );
+
+    // JavaScript
+    wp_enqueue_script(
+        'surf-conditions-app',
+        $theme_uri . '/js/min/surf-app.min.js',  // Use minified version
+        array(), 
+        filemtime($theme_dir . '/js/min/surf-app.min.js'),
+        true
+    );
+
+    // Localize script
+    wp_localize_script(
+        'surf-conditions-app',
+        'surfAppData',
+        array(
+            'root_url' => esc_url_raw(rest_url()),
+            'nonce' => wp_create_nonce('wp_rest')
+        )
+    );
+}
+add_action('wp_enqueue_scripts', 'wpjon_enqueue_surf_app_assets');
+
+
+// Load the REST API controller
+require_once get_template_directory() . '/inc/class-ny-surf-conditions-api.php';
+
+// Initialize the REST API
+add_action('rest_api_init', function() {
+    $controller = new NY_Surf_Conditions_API();
+    $controller->register_routes();
+});
+
+
+function enqueue_surf_template_styles() {
+    $theme_dir = get_template_directory();
+    $theme_uri = get_template_directory_uri();
+
+    if (is_single() && is_page_template('templates/template-surf.php')) {
+        wp_enqueue_style(
+            'surf-blog-post-styles',
+            $theme_uri . '/css/min/surf-blog-post.min.css',
+            array(),
+            filemtime($theme_dir . '/css/min/surf-blog-post.min.css')
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_surf_template_styles');
+
+
+
+
+// Drum Machine App 
+
+wp_enqueue_style('drum-machine-styles', get_template_directory_uri() . '/css/min/drum-machine-app.min.css');
+wp_enqueue_script('drum-machine-script', get_template_directory_uri() . '/js/min/drum-machine-app.min.js', array('jquery'), '1.0', true);
+
+// Drum Machine Shortcode
+
+function drum_machine_shortcode() {
+    ob_start(); ?>
+    <div class="page-drum-machine">
+        <div class="drum-machine">
+            <div class="controls">
+                <div class="drum-pad">
+                    <button type="button" id="kick-btn"></button>
+                    <label>KICK</label>
+                </div>
+                <div class="drum-pad">
+                    <button type="button" id="snare-btn"></button>
+                    <label>SNARE</label>
+                </div>
+                <div class="drum-pad">
+                    <button type="button" id="hihat-btn"></button>
+                    <label>HI-HAT</label>
+                </div>
+            </div>
+            <div class="tempo-display">120.0</div>
+            <div class="grid" id="sequencer-grid"></div>
+            <div class="step-numbers" id="step-numbers">
+                <?php for($i = 1; $i <= 16; $i++): ?>
+                    <div class="step-number"><?php echo $i; ?></div>
+                <?php endfor; ?>
+            </div>
+            <div class="transport">
+                <button id="play-button">PLAY</button>
+                <button id="stop-button">STOP</button>
+                <button id="clear-button">CLEAR</button>
+            </div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('drum_machine', 'drum_machine_shortcode');
+
+
+// Register Custom Post Type
+function register_drum_app_post_type() {
+    register_post_type('drum_app', array(
+        'labels' => array(
+            'name' => 'Drum App',
+            'singular_name' => 'Drum Sample'
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'menu_icon' => 'dashicons-playlist-audio',
+        'supports' => array('title')
+    ));
+}
+add_action('init', 'register_drum_app_post_type');
+
+// Register ACF Fields
+function register_drum_app_acf_fields() {
+    if(function_exists('acf_add_local_field_group')):
+        acf_add_local_field_group(array(
+            'key' => 'group_drum_samples',
+            'title' => 'Drum Samples',
+            'fields' => array(
+                array(
+                    'key' => 'field_kick_sample',
+                    'label' => 'Kick Sample',
+                    'name' => 'kick_sample',
+                    'type' => 'file',
+                    'return_format' => 'url',
+                    'mime_types' => 'wav'
+                ),
+                array(
+                    'key' => 'field_snare_sample',
+                    'label' => 'Snare Sample',
+                    'name' => 'snare_sample', 
+                    'type' => 'file',
+                    'return_format' => 'url',
+                    'mime_types' => 'wav'
+                ),
+                array(
+                    'key' => 'field_hihat_sample',
+                    'label' => 'Hi-Hat Sample',
+                    'name' => 'hihat_sample',
+                    'type' => 'file',
+                    'return_format' => 'url',
+                    'mime_types' => 'wav'
+                )
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'post_type',
+                        'operator' => '==',
+                        'value' => 'drum_app'
+                    )
+                )
+            )
+        ));
+    endif;
+}
+add_action('acf/init', 'register_drum_app_acf_fields');
+
+
+
+
+
+
+
+function enqueue_drum_samples() {
+    $latest_samples = get_posts([
+        'post_type' => 'drum_app',
+        'posts_per_page' => 1
+    ]);
+
+    if ($latest_samples) {
+        $sample_urls = [
+            'kick' => get_field('kick_sample', $latest_samples[0]->ID),
+            'snare' => get_field('snare_sample', $latest_samples[0]->ID),
+            'hihat' => get_field('hihat_sample', $latest_samples[0]->ID)
+        ];
+
+        wp_localize_script('drum-machine-script', 'drumSamples', $sample_urls);
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_drum_samples');
+
+
+function enqueue_drum_machine_assets() {
+    $theme_dir = get_template_directory();
+    $theme_uri = get_template_directory_uri();
+
+    wp_enqueue_style('drum-machine-styles', $theme_uri . '/css/min/drum-machine-app.min.css');
+    wp_enqueue_script('drum-machine-script', $theme_uri . '/js/min/drum-machine-app.min.js', array('jquery'), '1.0', true);
+
+    // Get latest drum samples
+    $samples = get_posts([
+        'post_type' => 'drum_app',
+        'posts_per_page' => 1,
+        'orderby' => 'date',
+        'order' => 'DESC'
+    ]);
+
+    if ($samples) {
+        $sample_urls = [
+            'kick' => get_field('kick_sample', $samples[0]->ID),
+            'snare' => get_field('snare_sample', $samples[0]->ID),
+            'hihat' => get_field('hihat_sample', $samples[0]->ID)
+        ];
+
+        wp_localize_script('drum-machine-script', 'drumSamples', $sample_urls);
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_drum_machine_assets');
+
+// Disable add new post since we only need one
+
+function modify_drum_app_capabilities() {
+    global $wp_post_types;
+    
+    $existing_posts = get_posts([
+        'post_type' => 'drum_app',
+        'posts_per_page' => 1
+    ]);
+ 
+    if (!empty($existing_posts)) {
+        $wp_post_types['drum_app']->cap->create_posts = 'do_not_allow';
+        $wp_post_types['drum_app']->capability_type = 'post';
+    }
+ }
+ add_action('init', 'modify_drum_app_capabilities', 11);

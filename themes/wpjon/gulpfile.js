@@ -31,6 +31,7 @@ gulp.task('css', () => {
         .pipe(gulp.dest('./css/min'));
 });
 
+
 // JavaScript Tasks
 gulp.task('js', () => {
     return gulp.src([
@@ -40,7 +41,9 @@ gulp.task('js', () => {
         './js/homePageContent.js',
         './js/singleBlog.js',
         './js/testimonialsBackGround.js',
-        './js/workwork.js'
+        './js/workwork.js',
+        './js/surf-app.js',
+        './js/drum-machine-app.js'
     ])
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))

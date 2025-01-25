@@ -112,17 +112,20 @@ get_header(); ?>
 
 <!-- Latest Insights Section -->
 <div id="latest-insights" class="container">
-<div class="header">
-    <h2>Latest Insights & Projects</h2>
-    <p>Dive into my journey as a WordPress developer through technical deep-dives, project case studies, and development best practices. Here I share my hands-on experience building scalable WordPress solutions and tackling real-world development challenges.</p>
-    <div class="tag active" data-category-id="10">All</div>
-    <div class="tag" data-category-id="12">Apps</div>
-    <div class="tag" data-category-id="8">Technical SEO</div>
-    <div class="tag" data-category-id="9">UX/UI</div>
-    <div class="tag" data-category-id="11">WP-Dev: WP REST API</div>
-    <div class="tag" data-category-id="7">Wordpress Development</div>
-</div>
-   <div id="card-grid" class="grid"></div>
+    <div class="header">
+        <h2>Latest Insights & Projects</h2>
+        <p>Dive into my journey as a WordPress developer through technical deep-dives, project case studies, and development best practices. Here I share my hands-on experience building scalable WordPress solutions and tackling real-world development challenges.</p>
+        <div class="tag active" data-category-id="10">All</div>
+        <div class="tag" data-category-id="12">Apps</div>
+        <div class="tag" data-category-id="8">Technical SEO</div>
+        <div class="tag" data-category-id="9">UX/UI</div>
+        <div class="tag" data-category-id="11">WP-Dev: WP REST API</div>
+        <div class="tag" data-category-id="13">WP-Dev: Wordpress Hooks</div>
+        <div class="tag" data-category-id="14">WP-Dev: WP-Query</div>
+       
+    </div>
+    <!-- <div id="loading-indicator" class="loading-indicator hidden">Loading...</div> -->
+    <div id="card-grid" class="grid"></div>
 </div>
 
 <!-- Enterprise Solutions Section -->

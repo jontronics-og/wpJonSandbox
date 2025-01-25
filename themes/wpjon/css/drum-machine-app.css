@@ -1,0 +1,141 @@
+.page-template-page-drum-machine-app {
+    min-height: 100vh;
+    background: #2b2b2b;
+}
+
+.page-drum-machine {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drum-machine {
+    margin: auto;
+    background: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    width: 800px;
+}
+.controls {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.drum-pad {
+    text-align: center;
+    margin: 0 10px;
+}
+.drum-pad button {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(145deg, #e6e6e6, #d4d4d4);
+    border: 2px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.8),
+               inset 0 -1px 1px rgba(0,0,0,0.2),
+               0 2px 4px rgba(0,0,0,0.1);
+}
+.drum-pad button:active {
+    background: linear-gradient(145deg, #d4d4d4, #e6e6e6);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+.drum-pad label {
+    display: block;
+    font-size: 11px;
+    margin-top: 8px;
+    color: #666;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+}
+.tempo-display {
+    background: #000;
+    color: #ff0000;
+    padding: 10px;
+    font-family: 'Digital', monospace;
+    font-size: 24px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 2px;
+    background: #000;
+    padding: 20px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.step-numbers {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 2px;
+    padding: 0 20px;
+    margin-top: 5px;
+}
+
+.step-number {
+    text-align: center;
+    color: #ff6b6b;
+    font-size: 12px;
+    font-family: monospace;
+    opacity: 0.8;
+    text-shadow: 0 0 2px rgba(255,107,107,0.3);
+}
+.cell {
+    width: 100%;
+    aspect-ratio: 2/3;
+    background: linear-gradient(145deg, #e6e6e6, #d4d4d4);
+    border: 2px solid #000;
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.8),
+               inset 0 -1px 1px rgba(0,0,0,0.2),
+               0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+.cell::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    opacity: 0.3;
+}
+.cell.active {
+    background: linear-gradient(145deg, #ff8f8f, #ff6b6b);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+}
+.cell.active::after {
+    background: #ff0000;
+    opacity: 1;
+}
+.cell.playing {
+    background: linear-gradient(145deg, #ffe066, #ffd93d);
+}
+.transport {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+.transport button {
+    padding: 10px 20px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.transport button:hover {
+    background: #666;
+}

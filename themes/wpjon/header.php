@@ -10,9 +10,11 @@
     <div id="page" class="site">
         <header class="wpj-header">
             <div class="wpj-header-container">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="wpj-logo">
-                    wpJon
-                </a>
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="wpj-logo">
+                <img src="<?php echo esc_url(get_site_url()); ?>/wp-content/uploads/2025/01/WpJonlogo.svg" 
+                    alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
+                    width="150">
+            </a>
                 
                 <nav class="wpj-main-nav">
                     <?php /*

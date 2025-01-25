@@ -1,16 +1,16 @@
-<footer class="site-footer">
+<footer class="site-footer" style="background-color:#73DFCB;">
 
         <div class="container">
             <div class="copyright">
-                <p> <?php echo get_theme_mod('set_copyright', 'Copyright x - All Rights Reserved'); ?></p>
+                <p> Copyright 202 - All Rights Reserved</p>
             </div>
                 <div class="footer-menu">
-                    <?php wp_nav_menu( array( 
+                    <? /*php wp_nav_menu( array( 
                         
                         'theme_location' => 'wp_jon_footer_menu',
                         'depth' => 1
                         
-                    )); ?>
+                    )); */ ?>
                 </div>
             </div>
     </footer>

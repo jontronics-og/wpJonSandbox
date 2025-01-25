@@ -36,19 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Testimonials data
     const testimonials = [
         {
-            quote: "Antimetal optimizes our cloud spend without compromising on security. Their expertise in striking the perfect balance between cost optimization and robust security measures makes them an invaluable asset.",
-            author: "Nicolas Chaillan",
-            role: "Former U.S. Air Force and Space Force<br>Chief Software Officer (CSO)"
+            quote: "It is my pleasure to recommend to you one of the software developers on my team, Jon Aquarone. I've worked closely with Jon as his direct supervisor and I can tell you he is an outstanding employee. Jon is a very hard-worker who takes great pride in his projects, he also goes out of his way to look for more work, he does not like tickets left undone! He is very smart and a fast learner. Not only is he technically talented, but also a great communicator and teacher who takes the time to help others. In fact, he goes out of his way to explain technical information to co-workers, in clear and concise language that clarifies their understanding.",
+            author: "Adriaan Wakefield",
+            role: "Director of Development <br> SAPinsider"
         },
         {
-            quote: "Their deep understanding of cloud infrastructure and security protocols has transformed how we approach our cloud architecture. The cost savings have been substantial without any compromise on performance.",
-            author: "Sarah Chen",
-            role: "Chief Technology Officer<br>Fortune 500 Financial Services"
+            quote: "I had the pleasure of working with Jon Aquarone at Perfect Planner LLC, and I can confidently say that he is an absolute WordPress mastermind. Jon played a crucial role in building our incredible website, bringing both technical expertise and a creative vision that elevated our online presence to new heights. He is fantastic with quality control, ensuring that every aspect of the site is polished to perfection. Jon consistently meets all deadlines and presents work of the highest quality. His turnaround times are incredibly fast, and he always delivers top-notch results. Beyond his technical abilities, Jon genuinely cares about his work and the success of the team, making him an invaluable team player. I recommend Jon with 110% confidence to any organization looking to take their website and online presence to the next level. He's a true professional, and I'm lucky to have had the opportunity to work with him!",
+            author: "Ed Danielov",
+            role: "Executive Vice President, Marketing <br> Perfect Planner LLC "
         },
         {
-            quote: "We've seen a 40% reduction in cloud costs while enhancing our security posture. Their collaborative approach ensures our team understands and can maintain the optimizations implemented.",
-            author: "Michael Anderson",
-            role: "VP of Engineering<br>Leading SaaS Platform"
+            quote: "Jon worked on several of our web projects. He has an extensive technical skillset and a strong work ethic. I'd recommend him for any development work you need help with.",
+            author: "Anthony Esper",
+            role: "Founder <br> Occupi Inc"
         }
     ];
 

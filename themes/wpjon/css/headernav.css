@@ -1,3 +1,12 @@
+
+.wpj-logo img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+
 /* Reset styles */
 .wpj-header * {
     margin: 0;
